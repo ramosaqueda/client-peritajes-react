@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState("ingenieromiguelch@gmail.com");
+  const [email, setEmail] = useState("rramos@gmail.com");
   const [password, setPassword] = useState("123456");
   const [loading, setLoading] = useState(false);
 
@@ -18,8 +18,11 @@ const Login = ({ history }) => {
   }, [user]);
 
   let dispatch = useDispatch();
-
-  const handleSubmit = async (e) => {};
+  
+  const handleSubmit = async (e) => {
+    alert("ingreso a handelSubmint" )
+    
+  };
 
   const googleLogin = async () => {
     auth
@@ -50,7 +53,7 @@ const Login = ({ history }) => {
           className="form-control"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Your email"
+          placeholder="Ingrese su email"
           autofocus
         />
       </div>
@@ -76,6 +79,7 @@ const Login = ({ history }) => {
         disabled={!email || password.length < 6}
       >
         Login with Email/Password
+        
       </Button>
     </form>
   );
