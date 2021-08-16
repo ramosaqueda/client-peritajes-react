@@ -14,12 +14,12 @@ const RegisterComplete = ({ history }) => {
     e.preventDefault();
     // validations
     if (!email || !password) {
-      toast.error("Email and password is required");
+      toast.error("Email y password son obligatorios");
       return;
     }
 
     if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long");
+      toast.error("Password no puede tener menos de 6 caracteres");
       return;
     }
 
@@ -56,7 +56,7 @@ const RegisterComplete = ({ history }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
-        autofocus
+        autoFocus
       />
       <br />
       <button type="submit" className="btn btn-raised">

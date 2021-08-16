@@ -10,17 +10,38 @@ const Login = ({ history }) => {
   const [email, setEmail] = useState("rramos@gmail.com");
   const [password, setPassword] = useState("123456");
   const [loading, setLoading] = useState(false);
+  
 
   const { user } = useSelector((state) => ({ ...state }));
+  console.log(user);
 
   useEffect(() => {
     if (user && user.token) history.push("/");
-  }, [user]);
+  }, [history,user]);
 
   let dispatch = useDispatch();
   
   const handleSubmit = async (e) => {
     alert("ingreso a handelSubmint" )
+    e.preventDefault();
+    setLoading(true);
+    try{
+      const result = await auth.signInWithEmailAndPassword(email,password);
+      console.log(result);
+      const {user} = result;
+      const idTokenResult= await user.getIdTokenREslt();
+      dispatch ({
+        type : "LOGGED_IN_USER",
+        payload: {
+          email:user.email,
+          token: idTokenResult.token
+        }
+      });
+    }
+    catch(error){
+      history.push("/");
+    }
+
     
   };
 
@@ -54,7 +75,7 @@ const Login = ({ history }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Ingrese su email"
-          autofocus
+          autoFocus
         />
       </div>
 

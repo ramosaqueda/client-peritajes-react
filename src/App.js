@@ -33,7 +33,7 @@ const App = () => {
     });
     // good practice of firebase - cleanup
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

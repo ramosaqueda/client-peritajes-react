@@ -10,7 +10,7 @@ const Register = ({ history }) => {
 
   useEffect(() => {
     if (user && user.token) history.push("/");
-  }, [user]);
+  }, [history, user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const Register = ({ history }) => {
 
     await auth.sendSignInLinkToEmail(email, config);
     toast.success(
-      `Email is send to ${email}. Click the link to complete your registration.`
+      `Un correo fue enviado a  ${email}. Haga click en el link para completar el registro.`
     );
     // save your email in local storage
     window.localStorage.setItem("emailForRegistration", email);
@@ -37,7 +37,7 @@ const Register = ({ history }) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email"
-        autofocus
+        autoFocus
       />
 
       <br />
