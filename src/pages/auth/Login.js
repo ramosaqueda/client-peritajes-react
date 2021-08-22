@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState("rramos@gmail.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("ramosaqueda@icloud.com");
+  const [password, setPassword] = useState("r1101kcn");
   const [loading, setLoading] = useState(false);
   
 
