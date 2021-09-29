@@ -5,44 +5,60 @@ import { Button } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { createOrUpdateUser, currentUser } from "../../functions/auth";
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState("ramosaqueda@icloud.com");
+  const [email, setEmail] = useState("ramos.aqueda@gmail.com");
   const [password, setPassword] = useState("r1101kcn");
   const [loading, setLoading] = useState(false);
-  
 
   const { user } = useSelector((state) => ({ ...state }));
-  console.log(user);
 
   useEffect(() => {
     if (user && user.token) history.push("/");
-  }, [history,user]);
+  }, [history, user]);
 
   let dispatch = useDispatch();
-  
+
+  const roleBasedRedirect = (res) => {
+    if (res.data.role === "admin") {
+      history.push("/admin/dashboard");
+    } else {
+      history.push("/user/history");
+    }
+  };
+
   const handleSubmit = async (e) => {
-    alert("ingreso a handelSubmint" )
     e.preventDefault();
     setLoading(true);
-    try{
-      const result = await auth.signInWithEmailAndPassword(email,password);
+    try {
+      const result = await auth.signInWithEmailAndPassword(email, password);
       console.log(result);
-      const {user} = result;
-      const idTokenResult= await user.getIdTokenREslt();
-      dispatch ({
-        type : "LOGGED_IN_USER",
-        payload: {
-          email:user.email,
-          token: idTokenResult.token
-        }
-      });
-    }
-    catch(error){
-      history.push("/");
-    }
+      const { user } = result;
+      const idTokenResult = await user.getIdTokenResult();
 
-    
+      currentUser(idTokenResult.token)
+        .then((res) => {
+          dispatch({
+            type: "LOGGED_IN_USER",
+            payload: {
+              name: res.data.name,
+              email: res.data.email,
+              token: idTokenResult.token,
+              role: res.data.role,
+              _id: res.data._id,
+            },
+          });
+          roleBasedRedirect(res);
+        })
+        .catch((err) => console.log(err));
+
+      //history.push("/");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      setLoading(false);
+    }
   };
 
   const googleLogin = async () => {
@@ -51,14 +67,22 @@ const Login = ({ history }) => {
       .then(async (result) => {
         const { user } = result;
         const idTokenResult = await user.getIdTokenResult();
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-        });
-        history.push("/");
+        createOrUpdateUser(idTokenResult.token)
+          .then((res) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: res.data.name,
+                email: res.data.email,
+                token: idTokenResult.token,
+                role: res.data.role,
+                _id: res.data._id,
+              },
+            });
+            roleBasedRedirect(res);
+          })
+          .catch((err) => console.log(err));
+        //history.push("/");
       })
       .catch((err) => {
         console.log(err);
@@ -74,7 +98,7 @@ const Login = ({ history }) => {
           className="form-control"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Ingrese su email"
+          placeholder="Your email"
           autoFocus
         />
       </div>
@@ -100,7 +124,6 @@ const Login = ({ history }) => {
         disabled={!email || password.length < 6}
       >
         Login with Email/Password
-        
       </Button>
     </form>
   );

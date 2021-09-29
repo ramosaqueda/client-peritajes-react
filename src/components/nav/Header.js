@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Menu } from "antd";
+import { Layout, Menu } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
 import {
   AppstoreOutlined,
   SettingOutlined,
@@ -11,9 +12,11 @@ import { Link } from "react-router-dom";
 import firebase from "firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import '../../Assets/css/Navbar.css';
 const { SubMenu, Item } = Menu;
+const { Header } = Layout;
 
-const Header = () => {
+const Cabezera = () => {
   const [current, setCurrent] = useState("home");
 
   let dispatch = useDispatch();
@@ -36,38 +39,67 @@ const Header = () => {
   };
 
   return (
-    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-      <Item key="home" icon={<AppstoreOutlined />}>
-        <Link to="/">Home</Link>
-      </Item>
 
-      {!user && (
-        <Item key="register" icon={<UserAddOutlined />} className="float=right">
-          <Link to="/register">Register</Link>
-        </Item>
-      )}
+    <div>
+      <Header>
+      <ul className="ulLeft">
+        <li> <img src= "iconsys.png" className="imgNavbar" /> </li>
+        <li><MenuOutlined className="iconMenu" /></li>
+        <li><span className="titleMenu">Registro Pericial</span></li>
+      </ul>
 
-      {!user && (
-        <Item key="login" icon={<UserOutlined />} className="float-right">
-          <Link to="/login">Login</Link>
-        </Item>
-      )}
-
-      {user && (
-        <SubMenu
-          icon={<SettingOutlined />}
-          title={user.email && user.email.split("@")[0]}
-          className="float-right"
-        >
-          <Item key="setting:1">Option 1</Item>
-          <Item key="setting:2">Option 2</Item>
-          <Item icon={<LogoutOutlined />} onClick={logout}>
-            Logout
+      <ul className="ulRight">
+      
+        <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" theme="dark">
+          <Item key="home" icon={<AppstoreOutlined />}>
+            <Link to="/">Home</Link>
           </Item>
-        </SubMenu>
-      )}
-    </Menu>
+
+          {!user && (
+            <Item key="register" icon={<UserAddOutlined />} className="float-right">
+              <Link to="/register">Register</Link>
+            </Item>
+          )}
+
+          {!user && (
+            <Item key="login" icon={<UserOutlined />} className="float-right">
+              <Link to="/login">Login</Link>
+            </Item>
+          )}
+
+          {user && (
+            <SubMenu
+              icon={<SettingOutlined />}
+              title={user.email && user.email.split("@")[0]}
+            >
+              {user && user.role === "subscriber" && (
+                <Item>
+                  <Link to="/user/history">Dashboard</Link>
+                </Item>
+              )}
+
+              {user && user.role === "admin" && (
+                <Item>
+                  <Link to="/admin/dashboard">Dashboard</Link>
+                </Item>
+              )}
+
+              <Item icon={<LogoutOutlined />} onClick={logout}>
+                Logout
+              </Item>
+            </SubMenu>
+          )}
+        </Menu>
+    
+       
+      </ul>
+    
+
+    
+    
+    </Header>
+    </div>
   );
 };
 
-export default Header;
+export default Cabezera;

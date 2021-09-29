@@ -1,11 +1,5 @@
-import React from 'react'
+import React from "react";
 
-const Wishlist = () => {
-    return (
-        <p>
-            Wishlist
-        </p>
-    )
-}
+const Wishlist = () => <p>Hello am Wishlist</p>;
 
-export default Wishlist
+export default Wishlist;
