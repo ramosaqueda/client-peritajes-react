@@ -1,56 +1,59 @@
 import React from "react";
-import { Layout } from "antd";
+import { Layout, Menu} from "antd";
 import { Link } from "react-router-dom";
+import {
+  DesktopOutlined,
+  DeploymentUnitOutlined ,
+  UserOutlined,
+  DatabaseOutlined,
+  TeamOutlined ,
+  IdcardOutlined,
+  MonitorOutlined,
+  SettingOutlined, 
+  ExperimentTwoTone
+} from '@ant-design/icons';
  
-const { Header } = Layout;
+const { SubMenu } = Menu; 
+const { Sider } = Layout;
+
+ 
 const AdminNav = () => (
  
-  <nav>
+ 
+  <Sider
+      style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+      }}
+      collapsible = {true}
+    >
+    <Menu
+    mode="inline"
+    theme="dark" >
+      <SubMenu title="Peritajes"  icon={<DeploymentUnitOutlined />}>
+    
+            <Menu.Item key="1" icon={<DeploymentUnitOutlined />} >Ingreso</Menu.Item>
+            <Menu.Item key="2" icon={<DatabaseOutlined />} >Lista</Menu.Item>
+            <Menu.Item key="3" icon={<DesktopOutlined />} >Actividades</Menu.Item>
+        
 
-    <ul className="nav flex-column">
-      <li className="nav-item">
-        <Link to="/admin/dashboard" className="nav-link">
-          Dashboard
-        </Link>
-      </li>
+      </SubMenu>
 
-      <li className="nav-item">
-        <Link to="/admin/product" className="nav-link">
-          Product
-        </Link>
-      </li>
+      <SubMenu title="Administarción" icon={<SettingOutlined />}>
+    
+            <Menu.Item key="4" icon={<TeamOutlined />}  >Fiscales</Menu.Item>
+            <Menu.Item key="5" icon ={<IdcardOutlined />} >Peritos</Menu.Item>
+            <Menu.Item key="6" icon = {<MonitorOutlined />}>Estados</Menu.Item>
+        
 
-      <li className="nav-item">
-        <Link to="/admin/products" className="nav-link">
-          Products
-        </Link>
-      </li>
+      </SubMenu>
 
-      <li className="nav-item">
-        <Link to="/admin/category" className="nav-link">
-          Category
-        </Link>
-      </li>
+    </Menu>
 
-      <li className="nav-item">
-        <Link to="/admin/sub" className="nav-link">
-          Sub Category
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/admin/coupon" className="nav-link">
-          Coupon
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/user/password" className="nav-link">
-          Password
-        </Link>
-      </li>
-    </ul>
-  </nav>
+  </Sider>
+ 
  
 );
 

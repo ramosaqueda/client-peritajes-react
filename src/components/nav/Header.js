@@ -15,9 +15,12 @@ import { useHistory } from "react-router-dom";
 import '../../Assets/css/Navbar.css';
 const { SubMenu, Item } = Menu;
 const { Header } = Layout;
+ 
 
 const Cabezera = () => {
   const [current, setCurrent] = useState("home");
+
+
 
   let dispatch = useDispatch();
   let { user } = useSelector((state) => ({ ...state }));
@@ -40,12 +43,11 @@ const Cabezera = () => {
 
   return (
 
-    <div>
+    
       <Header>
       <ul className="ulLeft">
-        <li> <img src= "iconsys.png" className="imgNavbar" /> </li>
-        <li><MenuOutlined className="iconMenu" /></li>
-        <li><span className="titleMenu">Registro Pericial</span></li>
+        <li> <img src= "../iconsys.png" className="imgNavbar" /> </li>
+        <li><span className="titleMenu">  Registro Pericial  </span></li>
       </ul>
 
       <ul className="ulRight">
@@ -98,7 +100,7 @@ const Cabezera = () => {
     
     
     </Header>
-    </div>
+    
   );
 };
 

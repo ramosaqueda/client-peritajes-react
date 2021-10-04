@@ -17,7 +17,7 @@ const Login = ({ history }) => {
   useEffect(() => {
     if (user && user.token) history.push("/");
   }, [history, user]);
-
+  
   let dispatch = useDispatch();
 
   const roleBasedRedirect = (res) => {

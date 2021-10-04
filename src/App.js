@@ -26,10 +26,12 @@ import ProductUpdate from "./pages/admin/product/ProductUpdate";
 import Product from "./pages/Product";
 import CategoryHome from "./pages/category/CategoryHome";
 import SubHome from "./pages/sub/SubHome";
-
+import { Layout } from "antd";
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 import { currentUser } from "./functions/auth";
+
+const  { Footer } = Layout; 
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,7 +64,8 @@ const App = () => {
 
   return (
     <>
-      <Cabezera />
+<Layout style={{ minHeight: '100vh' }}>
+ <Cabezera />
       <ToastContainer />
       <Switch>
  
@@ -93,6 +96,11 @@ const App = () => {
         <Route exact path="/category/:slug" component={CategoryHome} />
         <Route exact path="/sub/:slug" component={SubHome} />
       </Switch>
+
+      <Footer style={{ textAlign: 'center' }}>Deseño y construcción : Rafael Ramos aqueda. </Footer>
+
+      </Layout>
+
     </>
   );
 };

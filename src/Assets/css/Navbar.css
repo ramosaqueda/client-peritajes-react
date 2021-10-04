@@ -2,6 +2,7 @@
     float: left;
     list-style: none;
     display: flex;
+    padding-left: 0px;
 }
 .ulRight {
     float: right;
@@ -11,14 +12,19 @@
 }
 
 .iconMenu {
+    float: left;
     font-size: 20px;
-    color: white
+    color: white;
+  
+
 }
 
 .titleMenu {
     font-size: 18px;
     color: white;
     font-weight: bold;
+    letter-spacing: 3px;
+    padding-left: 10px;
 }
 .imgNavbar {
     width: 40px;
