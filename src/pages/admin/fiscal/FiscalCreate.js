@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Layout } from "antd";
 import FiscalCreateForm from "../../../components/forms/FiscalCreateForm";
+import { createFiscal} from "../../../functions/fiscal";
+ 
 
 const { Content } = Layout;
 const FiscalCreate  = () => {
@@ -20,8 +22,7 @@ const FiscalCreate  = () => {
     <div>
         <div>
           <AdminNav />
-          </div>
-        
+          </div>        
           <Content style={{ padding: '10px 210px ' }}>
             <FiscalCreateForm/>
          </Content>
