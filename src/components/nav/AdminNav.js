@@ -16,22 +16,29 @@ import {
 const { SubMenu } = Menu; 
 const { Sider } = Layout;
 
+const handleClick = (e) => {
+  
+   
+};
  
 const AdminNav = () => (
  
- 
+ <Layout>
   <Sider
       style={{
         overflow: 'auto',
         height: '100vh',
         position: 'fixed',
-        left: 0,
+        left: 0 
+        
       }}
       collapsible = {true}
     >
     <Menu
     mode="inline"
-    theme="dark" >
+    theme="dark" 
+    onClick={ handleClick}
+    >
       <SubMenu title="Peritajes"  icon={<DeploymentUnitOutlined />}>
     
             <Menu.Item key="1" icon={<DeploymentUnitOutlined />} >Ingreso</Menu.Item>
@@ -43,7 +50,8 @@ const AdminNav = () => (
 
       <SubMenu title="Administarción" icon={<SettingOutlined />}>
     
-            <Menu.Item key="4" icon={<TeamOutlined />}  >Fiscales</Menu.Item>
+            <Menu.Item key="4" icon={<TeamOutlined />} > 
+            <Link to="/admin/FiscalCreate" className="nav-text">Fiscales</Link></Menu.Item>
             <Menu.Item key="5" icon ={<IdcardOutlined />} >Peritos</Menu.Item>
             <Menu.Item key="6" icon = {<MonitorOutlined />}>Estados</Menu.Item>
         
@@ -53,7 +61,7 @@ const AdminNav = () => (
     </Menu>
 
   </Sider>
- 
+  </Layout>
  
 );
 

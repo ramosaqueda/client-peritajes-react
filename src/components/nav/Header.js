@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Layout, Menu } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+ 
 import {
   AppstoreOutlined,
   SettingOutlined,
