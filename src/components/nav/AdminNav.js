@@ -3,23 +3,18 @@ import { Layout, Menu} from "antd";
 import { Link } from "react-router-dom";
 import {
   DesktopOutlined,
-  DeploymentUnitOutlined ,
-  UserOutlined,
+  DeploymentUnitOutlined ,  
   DatabaseOutlined,
   TeamOutlined ,
   IdcardOutlined,
   MonitorOutlined,
-  SettingOutlined, 
-  ExperimentTwoTone
+  SettingOutlined,   
 } from '@ant-design/icons';
  
 const { SubMenu } = Menu; 
 const { Sider } = Layout;
 
-const handleClick = (e) => {
-  
-   
-};
+ 
  
 const AdminNav = () => (
  
@@ -37,7 +32,7 @@ const AdminNav = () => (
     <Menu
     mode="inline"
     theme="dark" 
-    onClick={ handleClick}
+   
     >
       <SubMenu title="Peritajes"  icon={<DeploymentUnitOutlined />}>
     
@@ -52,7 +47,8 @@ const AdminNav = () => (
     
             <Menu.Item key="4" icon={<TeamOutlined />} > 
             <Link to="/admin/FiscalCreate" className="nav-text">Fiscales</Link></Menu.Item>
-            <Menu.Item key="5" icon ={<IdcardOutlined />} >Peritos</Menu.Item>
+            <Menu.Item key="5" icon ={<IdcardOutlined />} >
+            <Link to="/admin/PeritoCreate" className="nav-text">Peritos</Link></Menu.Item>            
             <Menu.Item key="6" icon = {<MonitorOutlined />}>Estados</Menu.Item>
         
 
