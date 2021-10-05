@@ -20,7 +20,7 @@ export const updateFiscal = async (slug, Fiscal, authtoken) =>
     },
   });
 */
-export const createFiscal = async (Fiscal, authtoken) =>
+export const createFiscal = async (Fiscal,  authtoken) =>
   await axios.post(`${process.env.REACT_APP_API}/Fiscal`, Fiscal, {
     headers: {
       authtoken,

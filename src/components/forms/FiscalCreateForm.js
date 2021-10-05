@@ -7,12 +7,9 @@ import {
 } from 'antd';
 import { SaveOutlined  } from '@ant-design/icons';
 
-const onFinish = (values) => {
-  console.log("Success:", values);
-  //Can directly call props here
-};
+ 
 
-const FiscalCreateForm = () => (
+const FiscalCreateForm = ({onFinish, name,setName}) => (
   <>
 
   <Card  title="FISCALES" >
@@ -24,11 +21,11 @@ const FiscalCreateForm = () => (
       onFinish={onFinish}
     >
       
-      <Form.Item label="Fiscal">
+      <Form.Item label="Fiscal" name={'name'}>
         <Input />
       </Form.Item>
     
-      <Form.Item name={['fiscal', 'email']} label="Email" rules={[{ type: 'email' }]}>
+      <Form.Item name={'email'} label="Email" rules={[{ type: 'email' }]}>
           <Input />
       </Form.Item>
   
