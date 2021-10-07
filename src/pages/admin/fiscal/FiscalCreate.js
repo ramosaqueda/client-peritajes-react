@@ -3,21 +3,31 @@ import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Layout } from "antd";
+<<<<<<< HEAD
 import { createFiscal, getFiscales} from "../../../functions/fiscal";
+=======
+import { createFiscal, getFiscales, removeFiscal} from "../../../functions/fiscal";
+ 
+>>>>>>> 136c43501ce6c36bc5c222dbdedcf5fb94e79f5a
  
 import { Card } from 'antd';
 import {
+  Table,
+  Popconfirm,
   Form,
   Input,
   Button  
 } from 'antd';
 import { SaveOutlined  } from '@ant-design/icons';
+ 
 
 const { Content } = Layout;
 const FiscalCreate  = () => {
+   
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+<<<<<<< HEAD
   const [fiscales, setFiscales] = useState([]);
 
 
@@ -28,16 +38,81 @@ const FiscalCreate  = () => {
       setLoading(false);
     });
   }, []);
+=======
+  const [fiscales, setFiscales] =  useState([]);
+
+  //estrutura de la tabla de fiscales d
+ 
+ 
+  const columns = [
+    {
+      title: 'Nombre',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+
+    {
+      title: 'operation',
+      dataIndex: '_id',
+      render: (record, index) => {
+        return (
+          
+            <Popconfirm title="Seguro de eliminar?"  onConfirm={() => deleteFiscal(index._id)}>
+              <a href="#">Delete</a>
+            </Popconfirm> 
+         
+        ) 
+      }  
+         
+    },
+  ];
+
+ 
+  
+
+
+  useEffect(() => {
+      loadFiscales();
+  },[]);
+ 
+  const loadFiscales = () => {
+    getFiscales()
+      .then((res)=> {
+        setFiscales(res.data);
+      })
+      .catch((err)=> {
+        console.log(err);
+      })
+  }
+
+  const deleteFiscal = (id) => {
+    removeFiscal(id, user.token)
+      .then((res)=>{
+        loadFiscales();
+      })
+      .catch((err) => {
+        alert(err);
+      })
+  }
+  
+  
+>>>>>>> 136c43501ce6c36bc5c222dbdedcf5fb94e79f5a
   // redux
   const { user } = useSelector((state) => ({ ...state }));
   const onFinish = (e) => {
+   
     setLoading(true);
     createFiscal({ name, email }, user.token)
     .then((res) => {
       setLoading(false);
       setName("");
       toast.success(`"${res.data.name}" is created`);
-  
+      loadFiscales();
     })
     .catch((err) => {
       console.log(err);
@@ -82,6 +157,7 @@ const FiscalCreate  = () => {
                     </Button>
                   </Form.Item>
                 </Form>
+<<<<<<< HEAD
 
                 <div>
                 {fiscales.map((f) => (
@@ -89,6 +165,15 @@ const FiscalCreate  = () => {
                      <li>{f}</li>
                     </div>
                   ))}
+=======
+                <div className="row">
+
+                <Table dataSource={fiscales} columns={columns} 
+                     
+                />
+
+                   
+>>>>>>> 136c43501ce6c36bc5c222dbdedcf5fb94e79f5a
               </div>
               </Card>
          </Content>
