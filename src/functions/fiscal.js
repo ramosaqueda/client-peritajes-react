@@ -1,8 +1,8 @@
 import axios from "axios";
-/*
-export const getCategories = async () =>
-  await axios.get(`${process.env.REACT_APP_API}/categories`);
 
+export const getFiscales = async () =>
+  await axios.get(`${process.env.REACT_APP_API}/fiscales`);
+/*
 export const getFiscal = async (slug) =>
   await axios.get(`${process.env.REACT_APP_API}/Fiscal/${slug}`);
 

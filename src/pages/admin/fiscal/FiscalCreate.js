@@ -3,7 +3,7 @@ import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Layout } from "antd";
-import { createFiscal} from "../../../functions/fiscal";
+import { createFiscal, getFiscales} from "../../../functions/fiscal";
  
 import { Card } from 'antd';
 import {
@@ -18,6 +18,16 @@ const FiscalCreate  = () => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [fiscales, setFiscales] = useState([]);
+
+
+  useEffect(() => {
+    setLoading(true);
+    getFiscales().then((res) => {
+      setFiscales(res.data.fiscales);
+      setLoading(false);
+    });
+  }, []);
   // redux
   const { user } = useSelector((state) => ({ ...state }));
   const onFinish = (e) => {
@@ -72,6 +82,14 @@ const FiscalCreate  = () => {
                     </Button>
                   </Form.Item>
                 </Form>
+
+                <div>
+                {fiscales.map((f) => (
+                    <div className="col" key={f._id}>
+                     <li>{f}</li>
+                    </div>
+                  ))}
+              </div>
               </Card>
          </Content>
   </div>
