@@ -3,33 +3,31 @@ import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Layout } from "antd";
-import { createPerito, removePerito , getPeritos } from "../../../functions/perito";
+import { createEstado, getEstados, removeEstado } from "../../../functions/estados";
  
+ 
+import { Card } from 'antd';
 import {
-  Card,
   Table,
   Popconfirm,
   Form,
   Input,
-  Button,
-  message  
+  Button  
 } from 'antd';
 import { SaveOutlined  } from '@ant-design/icons';
+ 
+
 const { Content } = Layout;
-const PeritoCreate  = () => {
+const EstadoCreate  = () => {
+   
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [peritos, setPeritos] = useState([]);
+  const [Estados, setEstados] =  useState([]);
 
+  //estrutura de la tabla de Estadoes d
  
-  
-  useEffect(() => {
-    loadPeritos();
-  },[]);
-
-  // estructura tabla Peritos
-
+ 
   const columns = [
     {
       title: 'Nombre',
@@ -48,7 +46,7 @@ const PeritoCreate  = () => {
       render: (record, index) => {
         return (
           
-            <Popconfirm title="Seguro de eliminar?"  onConfirm={() => deletePerito(index._id)}>
+            <Popconfirm title="Seguro de eliminar?"  onConfirm={() => deleteEstado(index._id)}>
               <a href="#">Delete</a>
             </Popconfirm> 
          
@@ -58,38 +56,46 @@ const PeritoCreate  = () => {
     },
   ];
 
-  const deletePerito = (id) => {
-    removePerito(id, user.token)
+ 
+  
+
+
+  useEffect(() => {
+      loadEstados();
+  },[]);
+ 
+  const loadEstados = () => {
+    getEstados()
       .then((res)=> {
-        loadPeritos();
-        message.success(`"${res.data.name}" ha sido eliminado`);
+        setEstados(res.data);
       })
       .catch((err)=> {
-        message.success(`"Error al tratar de eliminar: ${err}"`);
+        console.log(err);
       })
-
   }
 
-  const loadPeritos = () => {
-    getPeritos()
-    .then((res)=> {
-      setPeritos(res.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  const deleteEstado = (id) => {
+    removeEstado(id, user.token)
+      .then((res)=>{
+        loadEstados();
+      })
+      .catch((err) => {
+        alert(err);
+      })
   }
+  
+  
   // redux
   const { user } = useSelector((state) => ({ ...state }));
   const onFinish = (e) => {
+   
     setLoading(true);
-    createPerito({ name, email }, user.token)
+    createEstado({ name, email }, user.token)
     .then((res) => {
       setLoading(false);
       setName("");
-      loadPeritos();
-      message.success(`"${res.data.name}" ha sido creado con éxito`);
-  
+      toast.success(`"${res.data.name}" is created`);
+      loadEstados();
     })
     .catch((err) => {
       console.log(err);
@@ -109,17 +115,17 @@ const PeritoCreate  = () => {
           ) : (
             <h4>:::</h4>
           )}
-             <Card  title="Peritos" >
+             <Card  title="EstadoES" >
                 <Form
                   labelCol={{ span: 4 }}
                   wrapperCol={{ span: 14 }}
                   layout="horizontal"
-                  title="Ingreso Fiscal"
+                  title="Ingreso Estado"
                   onFinish={onFinish}
                   
                 >
                   
-                  <Form.Item label="Perito" name="name"  value={name}  onChange={(e) => setName(e.target.value)}>
+                  <Form.Item label="Estado" name="name"  value={name}  onChange={(e) => setName(e.target.value)}>
                     <Input />
                   </Form.Item>
                 
@@ -128,20 +134,24 @@ const PeritoCreate  = () => {
                   </Form.Item>
               
                   <Form.Item>
-                  <Button type="primary" htmlType="submit" icon={ <SaveOutlined/> } >
-                      Submit
+                  
+                   <Button type="primary" htmlType="submit" icon={ <SaveOutlined/> } >
+                      Grabar
                     </Button>
                   </Form.Item>
                 </Form>
-
                 <div className="row">
-                    <Table dataSource={peritos} columns={columns}                         
-                    />
-                </div>
+
+                <Table dataSource={Estados} columns={columns} 
+                     
+                />
+
+                   
+              </div>
               </Card>
          </Content>
   </div>
   );
 };
 
-export default PeritoCreate;
+export default EstadoCreate;

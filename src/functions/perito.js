@@ -1,20 +1,20 @@
 import axios from "axios";
 
-export const getFiscaless = async () =>
-  await axios.get(`${process.env.REACT_APP_API}/fiscales`);
+export const getPeritos = async () =>
+  await axios.get(`${process.env.REACT_APP_API}/peritos`);
 
-export const getFiscal = async (slug) =>
-  await axios.get(`${process.env.REACT_APP_API}/Fiscal/${slug}`);
+export const getPerito = async (_id) =>
+  await axios.get(`${process.env.REACT_APP_API}/readperito/${_id}`);
 
-export const removeFiscal = async (slug, authtoken) =>
-  await axios.delete(`${process.env.REACT_APP_API}/Fiscal/${slug}`, {
+export const removePerito = async (_id, authtoken) =>
+  await axios.delete(`${process.env.REACT_APP_API}/removeperito/${_id}`, {
     headers: {
       authtoken,
     },
   });
 
-export const updateFiscal = async (slug, Fiscal, authtoken) =>
-  await axios.put(`${process.env.REACT_APP_API}/Fiscal/${slug}`, Fiscal, {
+export const updatePerito = async (_id, Perito, authtoken) =>
+  await axios.put(`${process.env.REACT_APP_API}/perito/${_id}`, Perito, {
     headers: {
       authtoken,
     },
