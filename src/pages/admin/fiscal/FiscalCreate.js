@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect } from "react";
 import AdminNav from "../../../components/nav/AdminNav";
-import { toast } from "react-toastify";
+
 import { useSelector } from "react-redux";
 import { Layout } from "antd";
-import { createFiscal, getFiscales} from "../../../functions/fiscal";
+import { createFiscal, getFiscales, removeFiscal} from "../../../functions/fiscal";
+ 
  
 import { Card } from 'antd';
 import {
@@ -22,16 +24,68 @@ const FiscalCreate  = () => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [fiscales, setFiscales] = useState([]);
+  const [fiscales, setFiscales] =  useState([]);
+
+  //estrutura de la tabla de fiscales d
+ 
+ 
+  const columns = [
+    {
+      title: 'Nombre',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+
+    {
+      title: 'operation',
+      dataIndex: '_id',
+      render: (record, index) => {
+        return (
+          
+            <Popconfirm title="Seguro de eliminar?"  onConfirm={() => deleteFiscal(index._id)}>
+              <a href="#">Delete</a>
+            </Popconfirm> 
+         
+        ) 
+      }  
+         
+    },
+  ];
+
+ 
+  
 
 
   useEffect(() => {
-    setLoading(true);
-    getFiscales().then((res) => {
-      setFiscales(res.data.fiscales);
-      setLoading(false);
-    });
-  }, []);
+      loadFiscales();
+  },[]);
+ 
+  const loadFiscales = () => {
+    getFiscales()
+      .then((res)=> {
+        setFiscales(res.data);
+      })
+      .catch((err)=> {
+        console.log(err);
+      })
+  }
+
+  const deleteFiscal = (id) => {
+    removeFiscal(id, user.token)
+      .then((res)=>{
+        loadFiscales();
+      })
+      .catch((err) => {
+        alert(err);
+      })
+  }
+  
+  
   // redux
   const { user } = useSelector((state) => ({ ...state }));
   const onFinish = (e) => {
@@ -87,13 +141,13 @@ const FiscalCreate  = () => {
                     </Button>
                   </Form.Item>
                 </Form>
+                <div className="row">
 
-                <div>
-                {fiscales.map((f) => (
-                    <div className="col" key={f._id}>
-                     <li>{f}</li>
-                    </div>
-                  ))}
+                <Table dataSource={fiscales} columns={columns} 
+                     
+                />
+
+                   
               </div>
               </Card>
          </Content>
@@ -102,3 +156,4 @@ const FiscalCreate  = () => {
 };
 
 export default FiscalCreate;
+ 
