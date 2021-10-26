@@ -21,7 +21,8 @@
     "react-toastify": "6.0.8",
     "redux": "4.0.5",
     "redux-devtools-extension": "2.13.8",
-    "typewriter-effect": "^2.18.0"
+    "typewriter-effect": "^2.18.0",
+    "validar-rut": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

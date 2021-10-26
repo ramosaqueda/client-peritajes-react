@@ -36,9 +36,10 @@ const AdminNav = () => (
     >
       <SubMenu title="Peritajes"  icon={<DeploymentUnitOutlined />}>
     
-            <Menu.Item key="1" icon={<DeploymentUnitOutlined />} >Ingreso</Menu.Item>
+            <Menu.Item key="1" icon={<DeploymentUnitOutlined />} ><Link to="/admin/peritajecreate" className="nav-text">Ingeso</Link></Menu.Item>
             <Menu.Item key="2" icon={<DatabaseOutlined />} >Lista</Menu.Item>
             <Menu.Item key="3" icon={<DesktopOutlined />} >Actividades</Menu.Item>
+ 
         
 
       </SubMenu>

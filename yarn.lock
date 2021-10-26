@@ -12724,6 +12724,11 @@ v8-to-istanbul@^7.0.0:
     convert-source-map "^1.6.0"
     source-map "^0.7.3"
 
+validar-rut@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/validar-rut/-/validar-rut-3.0.0.tgz#c0cf31a0636fbdc56f61cb39d629f694a599caf9"
+  integrity sha512-hvFCEmW9x1+EFp6AvJPctYUah9wLZK1dsow3ysWokAu05P8FA+8vSTvH7X5MQzC4GKuGXlsMAduTL71a4Er8UQ==
+
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"

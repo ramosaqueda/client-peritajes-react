@@ -20,6 +20,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
  
 import FiscalCreate from "./pages/admin/fiscal/FiscalCreate";
 import PeritoCreate from "./pages/admin/perito/PeritoCreate";
+import PeritajeCreate  from "./pages/admin/peritaje/peritajes";
 import { Layout } from "antd";
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -73,6 +74,7 @@ const App = () => {
         <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
         <AdminRoute exact path="/admin/fiscalcreate" component={FiscalCreate} />
         <AdminRoute exact path="/admin/peritocreate" component={PeritoCreate} />
+        <AdminRoute  exact path="/admin/peritajecreate" component={PeritajeCreate} />
       </Switch>
 
       <Footer style={{ textAlign: 'center' }}>Deseño y construcción : Rafael Ramos aqueda. </Footer>
