@@ -10,12 +10,12 @@ import "firebase/auth"
 const firebaseConfig = {
 
 
-  apiKey: "AIzaSyCSyQ4aJ0y1BvV0Gpb9Qx0Pmym5koEyhdY",
+  apiKey: "",
   authDomain: "sysper-ugi.firebaseapp.com",
   projectId: "sysper-ugi",
   storageBucket: "sysper-ugi.appspot.com",
-  messagingSenderId: "1072525832633",
-  appId: "1:1072525832633:web:2313e0e92d37ef25e20668"
+  messagingSenderId: "",
+  appId: "1:1072525832633::"
 };
 
 
